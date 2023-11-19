@@ -1,0 +1,95 @@
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+  }
+  
+  .navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .navbar-title {
+    font-size: 24px;
+  }
+  
+  .navbar-logout {
+    flex: 1 1 auto;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+  
+  .navbar-logout:hover {
+    background-color: #d32f2f;
+  }
+  .example-container {
+  
+    overflow-y: hidden;
+  }
+  
+  
+  .custom-drawer-style {
+    width: 250px;
+    overflow-y: auto; /* Allow vertical scrolling if needed */
+    overflow-x: hidden; /* Hide horizontal scrolling */
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  
+  /* Fill the entire page */
+  .fill-container {
+    height: 100vh;
+  }
+  
+  .custom-drawer-content{
+    /* width: 250px; */
+    
+    /* Other styles */
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  /* Customize the drawer */
+  .custom-drawer {
+    /* Adjust the width as needed */
+    width: 250px;
+    
+    /* Other styles */
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  
+  /* Customize the main content */
+  mat-drawer-content {
+    /* This will fill the remaining space in the container */
+    flex: 1;
+    /* background-color: #f2f2f2;
+    padding: 20px; */
+    
+    /* overflow-y: hidden;
+    overflow-x: hidden; */
+  }
+  
+  .icon-with-text {
+    display: flex;
+    align-items: center;
+  }
+  
+  .icon-with-text .text {
+    margin-left: 5px; /* Adjust as needed */
+  }
+  

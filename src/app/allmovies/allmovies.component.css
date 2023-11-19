@@ -1,0 +1,46 @@
+.content {
+  padding: 16px;
+}
+
+.content > mat-card {
+  width: 200px;
+}
+mat-toolbar {
+  justify-content: space-between;
+}
+
+.content {
+  padding: 16px;
+}
+
+.content > mat-card {
+  margin-bottom: 16px;
+}
+
+.column-label {
+  margin-right: 8px;
+  font-size: 1rem;
+}
+.row {
+  display: flex;
+}
+
+.col {
+  flex: 1;
+  padding: 1em;
+  border: solid;
+  margin: 2px;
+}
+
+/* Assuming Tailwind CSS for the classes */
+
+/* To ensure they align on the same line */
+.flex {
+  display: flex;
+  align-items: center; /* Vertically center the items */
+}
+
+/* To position the button to the left */
+button {
+  margin-right: auto; /* Pushes the button to the left */
+}

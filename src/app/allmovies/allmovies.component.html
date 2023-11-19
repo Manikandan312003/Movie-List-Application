@@ -1,0 +1,157 @@
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+
+<div class="container mx-auto">
+  <!-- Filter toggle button -->
+  <div class="text-right mt-4">
+    <div class="flex items-center justify-between">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              (click)="showFilters=!showFilters">
+        {{ showFilters ? 'Hide Filters' : 'Show Filters' }}
+      </button>
+      <div class="flex items-center flex-grow justify-center">
+        <h2 *ngIf="showFilters" class="text-lg font-semibold mb-4">Filter Movies</h2>
+      </div>
+    </div>
+    
+    
+
+  </div>
+  <div *ngIf="showFilters" class="filters bg-white rounded-lg shadow-lg p-4 mt-4">
+    
+    <form>
+      <div class="grid grid-cols-4 gap-4 mb-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+          <input type="text" name="Name" placeholder="Filter by Name" [(ngModel)]="filterCriteria.name" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Director</label>
+          <input type="text" name="Director" placeholder="Filter by Director" [(ngModel)]="filterCriteria.director" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Release Year From</label>
+          <input type="number" name="Release From" placeholder="Filter by Release Year From" [(ngModel)]="filterCriteria.releaseYearFrom" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Release Year To</label>
+          <input type="number" name="Release To" placeholder="Filter by Release Year To" [(ngModel)]="filterCriteria.releaseYearTo" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+        </div>
+      </div>
+      <div class="grid grid-cols-4 gap-4 mb-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Language</label>
+          <input type="text" name="Language" placeholder="Filter by Language" [(ngModel)]="filterCriteria.language" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Genre</label>
+          <input type="text" name="Genre" placeholder="Filter by Genre" [(ngModel)]="filterCriteria.genre" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Duration</label>
+          <input type="text" name="Duration" placeholder="Filter by Duration" [(ngModel)]="filterCriteria.duration" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Rating</label>
+          <input type="text" name="Rating" placeholder="Filter by Rating" [(ngModel)]="filterCriteria.rating" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  
+  
+  
+  <div *ngIf="showFilters" class="bg-white rounded-lg shadow-lg p-4 mt-4">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            (click)="applyFilters()">
+      Apply
+    </button>
+    <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2"
+            (click)="resetFilters()">
+      Reset
+    </button>
+  </div>
+
+  
+
+
+<div class="container mx-auto" style="margin-top:10px;">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+    <!-- Assuming 'movies' is an array of objects -->
+    <div *ngFor="let movie of filteredMovies" class="bg-white rounded-lg shadow-lg overflow-hidden">
+      <div>
+        <mat-card >
+          <mat-card-header>
+            <mat-card-title > {{movie.name}}
+                    <span >
+                      <button   matTooltip="Delete Movie" mat-icon-button (click)="deletemovie(movie.id,movie.name)">
+                        <mat-icon >delete</mat-icon>
+                      </button >
+                      <button mat-icon-button matTooltip="Edit Movie" routerLink="/editmovie/{{movie.id}}">
+                                <mat-icon>edit</mat-icon>
+                      </button>
+                      <a        matTooltip="View Movie Details" mat-icon-button routerLink="/movie/{{movie.id}}"  >
+                                <mat-icon>visibility</mat-icon>
+                      </a>
+                  </span>
+            </mat-card-title>
+          </mat-card-header>
+          <img mat-card-image
+          [src]="'data:image/jpg;base64,'+movie.movie_image"
+          />
+          <mat-card-content>
+
+            
+<div class="container mx-auto p-4">
+  <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+      <div class="bg-gray-800 text-white px-4 py-2">
+          Information
+      </div>
+      <div class="p-4">
+          <div class="mb-4">
+              <strong>Director: </strong>
+              <span *ngIf="movie.director">{{movie.director}}</span>
+              <span *ngIf="!movie.director">N/A</span>
+          </div>
+          <div class="mb-4">
+              <strong>Release Date: </strong>
+              <span *ngIf="movie.release_date">{{movie.release_date}}</span>
+              <span *ngIf="!movie.release_date">N/A</span>
+          </div>
+          <div class="mb-4">
+              <strong>Language: </strong>
+              <span *ngIf="movie.language">{{movie.language}}</span>
+              <span *ngIf="!movie.language">N/A</span>
+          </div>
+          <div class="mb-4">
+              <strong>Rating: </strong>
+              <span *ngIf="movie.rating">{{movie.rating}}</span>
+              <span *ngIf="!movie.rating">N/A</span>
+          </div>
+          <div>
+              <strong>Genre: </strong>
+              <span *ngIf="movie.genre">{{movie.genre}}</span>
+              <span *ngIf="!movie.genre">N/A</span>
+          </div>
+          <div>
+            <strong>Duration: </strong>
+            <span *ngIf="movie.duration">{{movie.duration}}</span>
+            <span *ngIf="!movie.duration">N/A</span>
+        </div>
+      </div>
+  </div>
+</div>
+
+        </mat-card-content>
+          <mat-card-actions>
+
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      
+    </div>
+  </div>
+</div>

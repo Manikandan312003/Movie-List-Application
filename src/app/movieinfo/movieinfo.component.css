@@ -1,0 +1,72 @@
+/* Custom styling for the movie card */
+.movie-card {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+mat-card {
+  width: 100%;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Flexbox layout for movie content */
+.movie-content {
+  display: flex;
+  /* align-items: center; */
+}
+
+
+
+/* Movie image styling */
+.movie-image img {
+  
+  max-height: 80vh; /* Set the maximum height of the image */
+  height: auto;
+  object-fit: contain; /* Maintain aspect ratio without cropping */
+  margin-right: 20px; /* Add some space between image and details */
+}
+
+/* Movie details styling */
+.movie-details {
+  flex: 1; /* Expand to take remaining space */
+}
+
+/* Movie description styling */
+.movie-description {
+  color: #666;
+  font-size: 0.9em;
+}
+
+/* Movie ratings styling */
+.movie-ratings p {
+  margin-bottom: 5px;
+}
+
+
+/*rating  */
+.star {
+  font-size: 24px;
+  color: gray;
+}
+
+/* Filled star */
+.star.filled {
+  color: gold;
+}
+
+.other-rating {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rating-msg {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #333;
+}
+.full-width {
+  width: 100%;
+  margin-bottom: 20px;
+}

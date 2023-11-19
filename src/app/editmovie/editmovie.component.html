@@ -1,0 +1,36 @@
+<div *ngIf="movie" class="edit-movie-form">
+    <mat-card class="mat-elevation-z4">
+      <form class="form-container">
+        <h2 >Edit Movie: {{movie.name}}</h2>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Director</mat-label>
+          <input matInput name="Director" placeholder="Director" [(ngModel)]="movie.director">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="half-width">
+            <mat-label>Release Date</mat-label>
+            <input matInput [matDatepicker]="releaseDatePicker" placeholder="Release Date" (dateChange)="onDateChange($event)" [formControl]="releaseDateControl">
+            <mat-datepicker-toggle matSuffix [for]="releaseDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #releaseDatePicker></mat-datepicker>
+          </mat-form-field>
+          
+        <mat-form-field appearance="fill" class="half-width">
+          <mat-label>Language</mat-label>
+          <input matInput name="Language" placeholder="Language" [(ngModel)]="movie.language">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="half-width">
+          <mat-label>Duration</mat-label>
+          <input matInput name="Duration" placeholder="Duration" [(ngModel)]="movie.duration">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="half-width">
+          <mat-label>Genre</mat-label>
+          <input matInput name="Genre" placeholder="Genre" [(ngModel)]="movie.genre">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput name="Description" placeholder="Description" rows="4" name="Description" [(ngModel)]="movie.description"></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" [disabled]="releaseDateControl.invalid" (click)="savechanges()">Save Changes</button>
+      </form>
+    </mat-card>
+  </div>
+  

@@ -1,0 +1,56 @@
+<div class="container">
+  <div *ngIf="movie" class="movie-image" class="movie-card mat-elevation-z4">
+    <mat-card>
+      <mat-card-actions>
+        <button mat-icon-button matTooltip="Edit Movie" routerLink="/editmovie/{{movie.id}}">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Delete Movie" (click)="deleteMovie(movie.id,movie.name)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+      <div class="movie-content">
+        <div class="movie-image">
+          <img [src]="'data:image/jpg;base64,'+movie.movie_image" alt="Movie Image">
+        </div>
+        <div class="movie-details">
+          <h2  mat-card-title>{{movie.name}}</h2>
+          <p class="movie-description">{{movie.description}}</p>
+          <div class="movie-ratings">
+            <p><strong>Rating:</strong> {{movie.rating}}</p>
+            <p><strong>Rating Details:</strong> </p>
+            <p><strong>Director:</strong> {{movie.director}}</p>
+            <p><strong>Language:</strong>{{movie.language}}</p>
+            <p><strong>Duration:</strong>{{movie.duration}}</p>
+            <p><strong>Genre:</strong>{{movie.genre}}</p>
+            <p><strong>Rating:</strong>
+              <div class="star-rating" (click)="rateMovie()">
+                <div class="star-rating" (click)="rateMovie()">
+                  <span class="star" *ngFor="let star of [1, 2, 3, 4, 5]" [class.filled]="star <= userRating" (mouseenter)="hoverRate(star)" (mouseleave)="resetHover()">
+                    &#9733;
+                  </span>
+                </div>
+                </div>
+                <mat-form-field appearance="fill" class="full-width">
+                  <mat-label>Your Rating</mat-label>
+                  <textarea matInput name="Your Rating" placeholder="Your Rating" rows="4" name="Your Rating" [(ngModel)]="ratingDetails.text"></textarea>
+                </mat-form-field>
+                <button mat-raised-button (click)="addrating()">Submit</button>
+            <div class="rating">
+              <h3>Other Users' Ratings</h3>
+              <div *ngFor="let rating of movie.rating_details" class="other-rating">
+                <span>
+                  <span  class="rating-msg">{{rating.text}}</span>
+                  <span style="margin-left: 10px;" class="star" *ngFor="let star of stars" [class.filled]="star <= rating.user_rating">&#9733;</span>
+               </span>
+              </div>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+      
+    </mat-card>
+  </div>
+</div>
+

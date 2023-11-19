@@ -1,0 +1,13 @@
+<h1  mat-dialog-title>Delete Movie {{data.name}}</h1>
+    <div mat-dialog-content> 
+      <p>
+          Do you want to remove "{{data.name}}" from List?
+        <button mat-raised-button (click)="confirmDeletion()"> Delete</button>
+        <button mat-raised-button (click)="cancelDeletion()"> Cancel</button>
+      </p>
+    </div>
+
+  
+<style>
+  h1{text-align: center;}
+</style>
