@@ -19,7 +19,6 @@ export class LoginComponent {
 login() {
   this.service.post('login',this.details).subscribe(
     (res)=>{
-      // var result=res as {'status':any}
       console.log(res)
       var result = res as {
         isadmin: string;
@@ -30,12 +29,11 @@ login() {
           console.log(result) 
           localStorage.setItem("userId",result.userid)
           localStorage.setItem("username",result.username)
-          localStorage.setItem("useremail",result.useremail)
-          localStorage.setItem("useremail",result.isadmin)
+          localStorage.setItem("isadmin",result.isadmin)
           this.service.userLoggedIn=true
           console.log(result?.['userid'])
+          
           this.service.loggedInUserId=result?.['userid']
-          //  this.location.back();
           this.router.navigateByUrl('allmovies')
           this.toast.success("Login successfully","Welcome "+result?.['username'])
         }

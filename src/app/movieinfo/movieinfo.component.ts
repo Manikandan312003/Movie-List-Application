@@ -1,29 +1,30 @@
 import { Component ,Inject} from '@angular/core';
 import { ApiserviceService } from '../services/apiservice.service';
 import { ActivatedRoute } from '@angular/router';
-
+import { Router } from '@angular/router';
 
 //Delete Confirm
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogRef, MAT_DIALOG_DATA,MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../delete/delete.component';
+import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-movieinfo',
   templateUrl: './movieinfo.component.html',
-  styleUrls: ['./movieinfo.component.css']
+  styleUrls: ['./movieinfo.component.css'],
 })
 export class MovieinfoComponent {
     //rating
   stars = [1, 2, 3, 4, 5];
-  otherUserRatings = [3, 4, 5, 2, 4,1,2,3,4,5,5]; // Example other users' ratings
+  otherUserRatings = [3, 4, 5, 2, 4,1,2,3,4,5,5]; 
   
     ratingDetails = {
       user_rating:0,
       text:'',
-      id:0
+      id:0,
+      userid:0
     }
-  userRating: number = 0; // To track the user's rating
+  userRating: number = 0; 
   
 
 
@@ -40,7 +41,7 @@ export class MovieinfoComponent {
   }
 
 
-  constructor(private service:ApiserviceService,private route:ActivatedRoute,public dialog:MatDialog,private toast:ToastrService){}
+  constructor(private service:ApiserviceService,private route:ActivatedRoute,private router:Router,public dialog:MatDialog,private toast:ToastrService){}
       movieid=0;
       movie:any;
       
@@ -60,9 +61,21 @@ export class MovieinfoComponent {
     }
 
         addrating(){
+          
+            if(!this.service.userLoggedIn){
+              this.toast.error("You Need to be Logged in");
+              this.router.navigateByUrl('/login')
+              return
+            }
+            this.ratingDetails.userid=parseInt(this.service.loggedInUserId);
           this.service.post('/addrating',this.ratingDetails).subscribe(
             (result)=>{
               console.log(result)
+              if((result as {'status':any}).status=='success'){
+                this.toast.success("review added");
+                this.loadDetails();
+                
+              }
             }
           )
         }
@@ -78,16 +91,7 @@ export class MovieinfoComponent {
             })
           }
           if(this.movieid){
-            var url = 'getmoviedetails?id='+this.movieid
-            console.log(url)
-            this.service.getrequest(url).subscribe(
-              result=>{
-                console.log(result)
-                const resultData = result as { movie: any[] }; 
-                this.movie=resultData.movie
-                console.log(resultData.movie)
-              }
-            )
+            this.loadDetails();
           }
         });
 
@@ -95,31 +99,36 @@ export class MovieinfoComponent {
       console.log(this.movie)
     }
 
+    loadDetails(){
+      var url = 'getmoviedetails?id='+this.movieid
+            console.log(url)
+            this.service.getrequest(url).subscribe(
+              result=>{
+                console.log(result)
+                const resultData = result as { movie: any[] }; 
+                this.movie=resultData.movie
+                console.log(resultData.movie)
+                console.log(this.movie.rating_details)
+                 if(this.movie.rating_details){
+                  for(var i=0;i<this.movie.rating_details.length;i++){
+                    console.log(this.movie.rating_details[i]['userid'])
+                      if(this.movie.rating_details[i]['userid']==this.service.loggedInUserId){
+                        
+                        this.ratingDetails=JSON.parse(JSON.stringify((this.movie.rating_details[i])));
+                      }
+                      
+                    }
+                    console.log(this.ratingDetails)
+              }
+              }
+
+              
+            )
+            
+    }
+
 
 
 }
-export interface deleteSuspectinfo {
-  id: number;
-  name: string;
-}
 
-@Component({
-  selector: 'confirmation-dialog',
-  templateUrl: "./delete-prompt.html",
-  standalone:true,
-  imports:[MatButtonModule]
-})
-export class ConfirmationDialogComponent {
-  constructor(
-    public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: deleteSuspectinfo
-  ) {}
 
-  confirmDeletion(): void {
-    this.dialogRef.close(true);
-  }
-
-  cancelDeletion(): void {
-    this.dialogRef.close(false); 
-  }
-}

@@ -15,7 +15,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import {MatButtonModule} from '@angular/material/button';
 
 import { HttpClientModule } from '@angular/common/http';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 //all movies
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -36,6 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,13 +45,14 @@ import { SignupComponent } from './signup/signup.component';
     EditmovieComponent,
     AddmovieComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+  
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,MatCardModule,MatSidenavModule,MatIconModule,MatToolbarModule,MatButtonModule,HttpClientModule,
-
+    MatTooltipModule,
     //All Movies
     MatGridListModule,MatDialogModule,
 

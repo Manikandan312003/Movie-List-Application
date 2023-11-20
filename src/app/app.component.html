@@ -1,10 +1,10 @@
 
   <p>
     <mat-toolbar color="primary">
-      <button mat-raised-button>
-        <div *ngIf="!router.isActive('/allmovies',true)">
-           <a style="text-decoration: none;" routerLink="/allmovies"> Show Movies</a></div>
-            <span *ngIf="router.isActive('/allmovies', true)" class="icon-with-text">
+      <button *ngIf="!router.isActive('/allmovies',true)" mat-raised-button>
+        <div >
+           <a style="text-decoration: none;" routerLink="/allmovies"> Show Movies</a></div></button>
+            <button mat-raised-button *ngIf="router.isActive('/allmovies', true)"><span  class="icon-with-text">
               <a style="text-decoration: none;" routerLink="/addmovie">   <mat-icon>add</mat-icon>
                 <span class="text">Add Movies</span></a>
               </span>
@@ -13,7 +13,7 @@
       </button>
       <span style="  text-align: center; flex-grow: 1; "> Movie List</span>
       
-      <button mat-flat-button (click)="logout()">Logout
+      <button *ngIf="this.service.userLoggedIn" mat-flat-button (click)="logout()">Logout
         <mat-icon
           aria-hidden="false"
           aria-label="logout icon"

@@ -8,7 +8,7 @@ import { ApiserviceService } from './services/apiservice.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(public router:Router,private service:ApiserviceService){}
+  constructor(public router:Router,public service:ApiserviceService){}
   title = 'Movie-List';
   
 

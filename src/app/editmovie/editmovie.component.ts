@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
 
 import { DatePipe } from '@angular/common';
 
-
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -17,7 +17,7 @@ import { DatePipe } from '@angular/common';
 export class EditmovieComponent {
   
   
-  constructor(private service:ApiserviceService,private route:ActivatedRoute,private datepipe:DatePipe){}
+  constructor(private service:ApiserviceService,private route:ActivatedRoute,private datepipe:DatePipe,private toast:ToastrService){}
   movieid=0;
   movie:any={release_date:new Date()};
   originalmovieDetail:any={release_date:new Date()}
@@ -45,6 +45,10 @@ export class EditmovieComponent {
   }
   
   savechanges() {
+    if(!this.service.isadmin){
+      this.toast.error("You Need to be Admin");
+      return 
+    }
     console.log(this.originalmovieDetail,this.movie)
     if(!this.areObjectsEqual(this.originalmovieDetail,this.movie)){
       console.log(this.originalmovieDetail,this.movie)
@@ -53,6 +57,7 @@ export class EditmovieComponent {
           var rest=res as { status: string }; 
           if(rest.status=='success'){
             this.getDetails();
+            this.toast.success("Saved Successfully");
           }
         });
     }

@@ -32,15 +32,15 @@ mat-toolbar {
   margin: 2px;
 }
 
-/* Assuming Tailwind CSS for the classes */
 
-/* To ensure they align on the same line */
+
+
 .flex {
   display: flex;
-  align-items: center; /* Vertically center the items */
+  align-items: center; 
 }
 
-/* To position the button to the left */
+
 button {
-  margin-right: auto; /* Pushes the button to the left */
+  margin-right: auto; 
 }

@@ -1,6 +1,6 @@
 import { Component,Inject } from '@angular/core';
 import { ApiserviceService } from '../services/apiservice.service';
-
+import { ConfirmationDialogComponent } from '../delete/delete.component';
 //Grid
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -22,7 +22,7 @@ export class AllmoviesComponent {
 
     movies: any;
   cols$: Observable<number>;
-    //Filter
+    
 
         
   showFilters: boolean=false;
@@ -60,7 +60,8 @@ export class AllmoviesComponent {
         }
           return true;
         });
-        // this.movies = this.filteredMovies
+        
+        this.toast.success("Filtered Applied Successfully");
       
     }
 
@@ -76,6 +77,7 @@ export class AllmoviesComponent {
             releaseYearFrom: new Date(),
             releaseYearTo: new Date()
           };
+          this.toast.success("Filter resetted Successfully")
         }
 
 
@@ -103,7 +105,7 @@ constructor(private breakpointObserver: BreakpointObserver , private service:Api
         if (result.breakpoints[Breakpoints.XLarge]) {
           return 5;
         }
-        return 4; // Default value
+        return 4; 
       }),
       shareReplay()
     );
@@ -117,13 +119,15 @@ constructor(private breakpointObserver: BreakpointObserver , private service:Api
                 this.service.getrequest('deletemovie?id='+id).subscribe((response)=>{
                     var res=response as {status:any}
                 if(res.status=="success"){
-                this.getMovieDetails;
+                this.getMovieDetails();
                 this.toast.success('Suspect Id:'+id+' Deleted',"Deleted Successfully");
         
                 }});
         }});
         }
         ngOnInit(){
+
+          
 
            this.getMovieDetails();
           console.log(this.movies)
@@ -157,29 +161,3 @@ duration:string,
 
 
 
-export interface deleteSuspectinfo {
-    id: number;
-    name: string;
-  }
-  
-  @Component({
-    selector: 'confirmation-dialog',
-    templateUrl: "./delete-prompt.html",
-    standalone:true,
-    imports:[MatButtonModule]
-  })
-  export class ConfirmationDialogComponent {
-    constructor(
-      public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: deleteSuspectinfo
-    ) {}
-  
-    confirmDeletion(): void {
-      this.dialogRef.close(true);
-    }
-  
-    cancelDeletion(): void {
-      this.dialogRef.close(false); 
-    }
-  }
-  

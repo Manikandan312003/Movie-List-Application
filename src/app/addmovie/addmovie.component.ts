@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiserviceService } from '../services/apiservice.service';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-addmovie',
@@ -9,8 +9,12 @@ import { ApiserviceService } from '../services/apiservice.service';
 })
 export class AddmovieComponent {
 selectedFileName: any;
-      constructor(private service:ApiserviceService){}
+      constructor(private service:ApiserviceService,private toast:ToastrService){}
       addMovie() {
+        if(!this.service.isadmin){
+          this.toast.error("You Need to be Admin");
+          return
+        }
 
         
         const formData = new FormData();
@@ -27,6 +31,12 @@ selectedFileName: any;
         this.service.post('/addmovies',formData).subscribe(
           result=>{
             console.log(result)
+            if((result as {'status':any}).status=='success'){
+              this.toast.success("Successfully Added",this.newMovie.name);
+            }
+            else{
+              this.toast.error("Error",(result as {'status':any}).status);
+            }
           }
         )
       }
@@ -48,9 +58,7 @@ selectedFileName: any;
           this.selectedFileName=this.movie_image?.name;
         }
         else{
-          // this.toast.error("Please choose Photo")
-          // this.photo=undefined;
-          // this.photoname=''
+          this.toast.error("Please choose Photo")
         }
         console.log(this.movie_image)
       }

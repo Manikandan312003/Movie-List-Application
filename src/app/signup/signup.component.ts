@@ -20,6 +20,10 @@ export class SignupComponent {
             if(result.status=='success'){
               this.toast.success("Successfully registered");
             }
+            else{
+              this.toast.error("Error",(res as {'message':any}).message)
+              console.log((res as {'message':any}).message)
+            }
           }
         )
     }
