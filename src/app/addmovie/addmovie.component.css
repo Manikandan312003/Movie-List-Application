@@ -39,3 +39,40 @@
     color: #555;
   }
   
+
+
+  /*Time */
+
+
+  /* time-input.component.css */
+  .time-input-container {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+
+.time-input-container input {
+  width: 30px;
+  text-align: center;
+  margin: 0 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  outline: none;
+}
+
+.time-input-container span {
+  margin: 0 5px;
+  font-weight: bold;
+}
+
+/* Optional: Add styling for validation or error state */
+.time-input-container input:invalid {
+  border-color: red;
+}
+
+/* Optional: Add styling for disabled state */
+.time-input-container input:disabled {
+  background-color: #f2f2f2;
+  cursor: not-allowed;
+}

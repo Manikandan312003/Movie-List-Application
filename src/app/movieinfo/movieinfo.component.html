@@ -14,7 +14,7 @@
           <img [src]="'data:image/jpg;base64,'+movie.movie_image" alt="Movie Image">
         </div>
         <div class="movie-details">
-          <h2  mat-card-title>{{movie.name}}</h2>
+          <div style="text-align: center;"><h2  mat-card-title>{{movie.name}}</h2></div>
           <p class="movie-description">{{movie.description}}</p>
           <div class="movie-ratings">
             <p><strong>Rating:</strong> {{movie.rating}}</p>

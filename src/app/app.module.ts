@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatTooltipModule} from '@angular/material/tooltip';
 
 //all movies
-import {MatGridListModule} from '@angular/material/grid-list';
+
 import { MovieinfoComponent } from './movieinfo/movieinfo.component';
 import { EditmovieComponent } from './editmovie/editmovie.component'
 import {MatDialogModule} from '@angular/material/dialog';
@@ -35,6 +35,7 @@ import { AddmovieComponent } from './addmovie/addmovie.component';
 import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { TimeComponent } from './addmovie/addmovie.component';
 
 
 @NgModule({
@@ -52,15 +53,15 @@ import { SignupComponent } from './signup/signup.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,MatCardModule,MatSidenavModule,MatIconModule,MatToolbarModule,MatButtonModule,HttpClientModule,
-    MatTooltipModule,
+    MatTooltipModule,TimeComponent,
     //All Movies
-    MatGridListModule,MatDialogModule,
+    MatDialogModule,
 
     //Edit Movies
     MatFormFieldModule,MatInputModule,FormsModule,MatDatepickerModule,ReactiveFormsModule,MatNativeDateModule,
     ToastrModule.forRoot(
       {positionClass:'toast-top-center',
-      maxOpened:5,
+      maxOpened:1,
     
   }
     )

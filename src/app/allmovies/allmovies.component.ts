@@ -31,7 +31,8 @@ export class AllmoviesComponent {
     name: '',
     director: '',
     language: '',
-    rating: 0,
+    ratingFrom: 0,
+    ratingTo:0,
     genre:'',
     duration:'',
     releaseYearFrom: new Date(),
@@ -51,7 +52,17 @@ export class AllmoviesComponent {
                   console.log(key);
                 return false;
               }
-            } else if (key !== 'name' && key !== 'director' && key !== 'language' && key !== 'rating' && key!='genre' && key!='duration' ) {
+            }else if (key === 'ratingFrom') {
+              if (this.filterCriteria.ratingFrom && movie.rating < this.filterCriteria.ratingFrom) {
+                  console.log(key);
+                return false;
+              }
+            }else if (key === 'ratingTo') {
+              if (this.filterCriteria.ratingTo && movie.rating > this.filterCriteria.ratingTo) {
+                  console.log(key);
+                return false;
+              }
+            } else if (key !== 'name' && key !== 'director' && key !== 'language' && key!='genre' && key!='duration' ) {
                 continue;
             } else if (this.filterCriteria[key] && !(''+movie[key]).toLowerCase().includes( (''+this.filterCriteria[key]).toLowerCase() )) {
                 console.log(key,this.filterCriteria[key]);
@@ -71,7 +82,8 @@ export class AllmoviesComponent {
             name: '',
             director: '',
             language: '',
-            rating: 0,
+            ratingFrom: 0,
+            ratingTo:0,
             genre:'',
             duration:'',
             releaseYearFrom: new Date(),
@@ -120,7 +132,7 @@ constructor(private breakpointObserver: BreakpointObserver , private service:Api
                     var res=response as {status:any}
                 if(res.status=="success"){
                 this.getMovieDetails();
-                this.toast.success('Suspect Id:'+id+' Deleted',"Deleted Successfully");
+                this.toast.success('Movie Id:'+id+' Deleted',"Deleted Successfully");
         
                 }});
         }});

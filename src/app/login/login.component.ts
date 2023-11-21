@@ -16,6 +16,13 @@ export class LoginComponent {
   password:''
   }
 
+  ngOnInit(){
+    
+    if(this.service.userLoggedIn==true){
+      this.router.navigateByUrl('allmovies')
+    }
+  }
+
 login() {
   this.service.post('login',this.details).subscribe(
     (res)=>{

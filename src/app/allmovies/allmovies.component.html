@@ -4,7 +4,6 @@
 
 
 <div class="container mx-auto">
-  <!-- Filter toggle button -->
   <div class="text-right mt-4">
     <div class="flex items-center justify-between">
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -22,40 +21,44 @@
   <div *ngIf="showFilters" class="filters bg-white rounded-lg shadow-lg p-4 mt-4">
     
     <form>
-      <div class="grid grid-cols-4 gap-4 mb-4">
+      <div class="grid grid-cols-5 gap-5 mb-5">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
-          <input type="text" name="Name" placeholder="Filter by Name" [(ngModel)]="filterCriteria.name" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+          <input type="text" name="Name"  (keydown.enter)="applyFilters()" placeholder="Filter by Name" [(ngModel)]="filterCriteria.name" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Director</label>
-          <input type="text" name="Director" placeholder="Filter by Director" [(ngModel)]="filterCriteria.director" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+          <input type="text" name="Director" (keydown.enter)="applyFilters()" placeholder="Filter by Director" [(ngModel)]="filterCriteria.director" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Release Year From</label>
-          <input type="number" name="Release From" placeholder="Filter by Release Year From" [(ngModel)]="filterCriteria.releaseYearFrom" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+          <input type="number" name="Release From" (keydown.enter)="applyFilters()" placeholder="Filter by Release Year From" [(ngModel)]="filterCriteria.releaseYearFrom" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Release Year To</label>
-          <input type="number" name="Release To" placeholder="Filter by Release Year To" [(ngModel)]="filterCriteria.releaseYearTo" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+          <input type="number" name="Release To" (keydown.enter)="applyFilters()" placeholder="Filter by Release Year To" [(ngModel)]="filterCriteria.releaseYearTo" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
         </div>
-      </div>
-      <div class="grid grid-cols-4 gap-4 mb-4">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Language</label>
-          <input type="text" name="Language" placeholder="Filter by Language" [(ngModel)]="filterCriteria.language" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+          <input type="text" name="Language" (keydown.enter)="applyFilters()" placeholder="Filter by Language" [(ngModel)]="filterCriteria.language" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
         </div>
+      </div>
+      <div class="grid grid-cols-5 gap-5 mb-5">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Genre</label>
-          <input type="text" name="Genre" placeholder="Filter by Genre" [(ngModel)]="filterCriteria.genre" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+          <input type="text" name="Genre" (keydown.enter)="applyFilters()" placeholder="Filter by Genre" [(ngModel)]="filterCriteria.genre" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Duration</label>
-          <input type="text" name="Duration" placeholder="Filter by Duration" [(ngModel)]="filterCriteria.duration" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+          <input type="text" name="Duration" (keydown.enter)="applyFilters()" placeholder="Filter by Duration" [(ngModel)]="filterCriteria.duration" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Rating</label>
-          <input type="text" name="Rating" placeholder="Filter by Rating" [(ngModel)]="filterCriteria.rating" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Rating From</label>
+          <input type="text" name="Rating From" (keydown.enter)="applyFilters()" placeholder="Filter by Rating From" [(ngModel)]="filterCriteria.ratingFrom" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Rating To</label>
+          <input type="text" name="Rating To" (keydown.enter)="applyFilters()" placeholder="Filter by Rating To" [(ngModel)]="filterCriteria.ratingTo" class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500">
         </div>
       </div>
     </form>
@@ -126,17 +129,17 @@
               <span *ngIf="movie.language">{{movie.language}}</span>
               <span *ngIf="!movie.language">N/A</span>
           </div>
-          <div class="mb-4">
+          <div  class="mb-4">
               <strong>Rating: </strong>
               <span *ngIf="movie.rating">{{movie.rating}}</span>
               <span *ngIf="!movie.rating">N/A</span>
           </div>
-          <div>
+          <div class="mb-4">
               <strong>Genre: </strong>
               <span *ngIf="movie.genre">{{movie.genre}}</span>
               <span *ngIf="!movie.genre">N/A</span>
           </div>
-          <div>
+          <div class="mb-4">
             <strong>Duration: </strong>
             <span *ngIf="movie.duration">{{movie.duration}}</span>
             <span *ngIf="!movie.duration">N/A</span>

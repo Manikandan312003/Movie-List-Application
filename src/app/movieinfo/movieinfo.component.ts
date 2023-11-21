@@ -54,7 +54,7 @@ export class MovieinfoComponent {
                 var res=response as {status:any}
             if(res.status=="success"){
             
-            this.toast.success('Suspect Id:'+id+' Deleted',"Deleted Successfully");
+            this.toast.success('Movie Id:'+id+' Deleted',"Deleted Successfully");
     
             }});
     }});

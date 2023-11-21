@@ -45,7 +45,7 @@ export class EditmovieComponent {
   }
   
   savechanges() {
-    if(!this.service.isadmin){
+    if(this.service.isadmin==false){
       this.toast.error("You Need to be Admin");
       return 
     }
